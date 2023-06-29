@@ -25,10 +25,10 @@ function showPhoto (photos) {
     });
 }
 
-input.addEventListener('input', () => {
+function filterPhotos() {
     const valueFromInput = input.value;
     const filtered = photos.filter(photo => photo.tags.indexOf(valueFromInput) > -1);
-    console.log(filtered);
     showPhoto(filtered);
+}
 
-})
+input.addEventListener('input', filterPhotos);

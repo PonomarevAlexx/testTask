@@ -6,28 +6,18 @@
 body{
     max-width: 1200px;
     margin: auto;
-    /* padding: 0 15px;
-    background-color: rgb(242, 238, 238);*/
 }
 header{
-    /* margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap; */
     background-color: #f8f9fa;
     padding: 20px;
     text-align: center;
 }
 input{
-    width: 200px; 
+    width: 400px; 
     font-size: 18px; 
     padding: 15px 40px;
     border: 1px solid #ddd;
-    transition: width 0.3s ease-in-out;
 } 
-input:focus{
-    width: 400px;
-}
 .photo_container{
     padding: 10px;
     display: flex;
@@ -45,7 +35,7 @@ img{
     max-width: 100%;
     height: auto;
 }
-.photo_title{
+h2{
     font-size: 18px;
     text-align: center;
     margin-bottom: 10px;
@@ -54,4 +44,35 @@ footer p{
     background-color: #f8f9fa;
     text-align: center;
     padding: 30px;
+}
+
+@media (max-width: 770px) { 
+    .photo_item {
+        width: calc(50% - 20px);
+        box-sizing: border-box;
+    }
+    input{
+        width: 300px; 
+        font-size: 16px; 
+        padding: 15px 30px;
+        border: 1px solid #ddd;
+    } 
+    h2{
+        font-size: 16px;
+    }
+}
+@media (max-width: 575px) { 
+    .photo_item {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    input{
+        width: 300px; 
+        font-size: 14px; 
+        padding: 10px 20px;
+        border: 1px solid #ddd;
+    } 
+    h2{
+        font-size: 14px;
+    }
 }
