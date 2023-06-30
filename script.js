@@ -9,12 +9,22 @@ const pageNumber = document.querySelector('.number_page');
 
 let photos = [];
 let currentPage = 1;
+let timeoutId;
 
 // Загрузка данных из API
-const getData = (url, page = 1) => fetch(`${url}&page=${page}`)
+const getData = (url, page = 1, filterValue) => fetch(`${url}&page=${page}&q=${filterValue || ''}`)
 .then(res => res.json())
-.then(data => {
-    photos = [...data.hits];
+.then(({totalHits, hits}) => {
+    photos = [...hits];
+
+    if (totalHits === 0) {
+        main.innerHTML = '<h2>Ничего не найдено</h2>';
+        btnNextPage.disabled = true;
+        return;
+    } else if (btnNextPage.disabled){
+        btnNextPage.disabled = false;
+    }
+
     showPhoto(photos);
 })
 .catch(error => console.error('Ошибка:', error))
@@ -24,8 +34,9 @@ getData(URL_IMAGE_SERVER, currentPage);
 // Функция очистки фильтра тегов
 function clearInput() {
         input.value = '';
-        showPhoto(photos);
         btnClearInput.setAttribute('disabled', true);
+        currentPage = 1;
+        paginationControl(1);
 }
 
 // Функция создающая элемент для вывода фото
@@ -47,11 +58,12 @@ function showPhoto (photos) {
 
 // Функция фильтрации фотографий по тегу
 function filterPhotos() {
-    const valueFromInput = input.value.toUpperCase().trim();
-    const filtered = photos.filter(({tags}) => tags.toUpperCase().trim().includes(valueFromInput));
-    showPhoto(filtered);
-
-    btnClearInput.disabled = !valueFromInput;
+    btnClearInput.disabled = !input.value.trim();
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      currentPage = 1;
+      paginationControl(1);
+    }, 500);
 }
 
 // Инпут для ввода тегов
@@ -61,10 +73,10 @@ input.addEventListener('input', filterPhotos);
 btnClearInput.addEventListener('click', clearInput);
 
 // Разбиение на страницы
-function paginationControl(currentPage) {
-    pageNumber.textContent = currentPage;
-    getData(URL_IMAGE_SERVER, currentPage);
-    btnPrevPage.disabled = currentPage < 2;
+function paginationControl(page) {
+    getData(URL_IMAGE_SERVER, page, input.value.toUpperCase().trim());
+    pageNumber.textContent = page;
+    btnPrevPage.disabled = page < 2;
 }
 
 // Вызов предыдущей страницы
