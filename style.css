@@ -67,6 +67,24 @@ header{
     text-align: center;
     margin-bottom: 10px;
 }
+.btn{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 15px;
+    align-items: center;
+}
+.btn_prev,
+.btn_next{
+    padding: 10px 30px;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    cursor: pointer;
+}
+.btn_prev:hover,
+.btn_next:hover{
+    background-color: #e5e6e7;
+}
 .author_name{
     background-color: #f8f9fa;
     text-align: center;
@@ -90,6 +108,11 @@ header{
     .photo_item h2{
         font-size: 16px;
     }
+    .btn_prev,
+    .btn_next{
+    padding: 10px 20px;
+    font-size: 16px;
+}
 }
 @media (max-width: 575px) { 
     .photo_item {
@@ -108,4 +131,9 @@ header{
     .photo_item h2{
         font-size: 14px;
     }
+    .btn_prev,
+    .btn_next{
+    padding: 5px 15px;
+    font-size: 14px;
+}
 }

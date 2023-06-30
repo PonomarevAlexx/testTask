@@ -1,10 +1,15 @@
 let photos = [];
+let currentPage = 1;
 const input = document.querySelector('.filter_input');
 const main = document.querySelector('.photo_container');
 const btnClearInput = document.querySelector('.btn_clear_input');
+const URL_IMAGE_SERVER = 'https://pixabay.com/api/?key=37954840-02a2d9419214ddd959c05fe70&orientation=vertical&image_type=photo&per_page=21'
+const btnPrevPage = document.querySelector('.btn_prev');
+const btnNextPage = document.querySelector('.btn_next');
+const pageNumber = document.querySelector('.number_page');
 
 // Загрузка данных из API
-const getData = url => fetch(url)
+const getData = (url, page = 1) => fetch(`${url}&page=${page}`)
 .then(res => res.json())
 .then(data => {
     photos = [...data.hits];
@@ -12,7 +17,7 @@ const getData = url => fetch(url)
 })
 .catch(error => console.error('Ошибка:', error))
 
-getData('https://pixabay.com/api/?key=37954840-02a2d9419214ddd959c05fe70&orientation=vertical&image_type=photo&per_page=21');
+getData(URL_IMAGE_SERVER, currentPage);
 
 // Функция очистки фильтра тегов
 function clearInput() {
@@ -51,3 +56,15 @@ input.addEventListener('input', filterPhotos);
 
 // Вызов функции очистки фильтра
 btnClearInput.addEventListener('click', clearInput);
+
+btnPrevPage.addEventListener('click', () => {
+    currentPage--;
+    pageNumber.textContent = currentPage;
+    getData(URL_IMAGE_SERVER, currentPage);
+});
+
+btnNextPage.addEventListener('click', () => {
+    currentPage++;
+    pageNumber.textContent = currentPage;
+    getData(URL_IMAGE_SERVER, currentPage);
+});
