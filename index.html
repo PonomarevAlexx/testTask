@@ -3,25 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Photos</title>
     <link rel = "stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="header_title">
-            <h1>Photos</h1>
-        </div>
-        
-        <input class="header_input" type="text" placeholder="Введите тег...">
-    </header>
-
-    <main class="photo_container">
-
-    </main>
-
-    <footer>
-        <p>Ponomarev Alex</p>
-    </footer>
-    <script src="script.js"></script>
+    <div class="wrapper">
+        <header>
+            <div class="header_title">
+                <h1>Photos</h1>
+            </div>
+            
+            <div class="filter">
+                <input class="filter_input" type="text" placeholder="Enter tag...">
+                <button class="btn_clear_input">Clear filter</button>
+            </div>
+            
+        </header>
+    
+        <main class="photo_container">
+    
+        </main>
+    
+        <footer>
+            <p class="author_name">Ponomarev Alex</p>
+        </footer>
+        <script src="script.js"></script>
+    </div>
+    
 </body>
 </html>

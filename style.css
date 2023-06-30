@@ -3,16 +3,38 @@
     margin: 0;
     box-sizing: border-box;
 }
+html,
 body{
+    height: 100%;
     max-width: 1200px;
     margin: auto;
+}
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 header{
     background-color: #f8f9fa;
     padding: 20px;
     text-align: center;
 }
-input{
+.filter{
+    display: flex;
+    justify-content: center;
+}
+.btn_clear_input{
+    font-size: 18px; 
+    padding: 0 20px;
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+.btn_clear_input:hover{
+    border: 1px solid #cccbcb;
+    background-color: #e5e6e7;
+}
+.filter_input{
     width: 400px; 
     font-size: 18px; 
     padding: 15px 40px;
@@ -23,6 +45,7 @@ input{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    flex: 1 1 auto;
 }
 .photo_item {
     border: 1px solid #ddd;
@@ -30,17 +53,21 @@ input{
     padding: 10px;
     width: calc(33% - 20px);
     box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
 }
-img{
+.photo_item img{
     max-width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
 }
-h2{
+.photo_item h2{
     font-size: 18px;
     text-align: center;
     margin-bottom: 10px;
 }
-footer p{
+.author_name{
     background-color: #f8f9fa;
     text-align: center;
     padding: 30px;
@@ -51,13 +78,16 @@ footer p{
         width: calc(50% - 20px);
         box-sizing: border-box;
     }
-    input{
+    .filter_input{
         width: 300px; 
         font-size: 16px; 
         padding: 15px 30px;
         border: 1px solid #ddd;
     } 
-    h2{
+    .btn_clear_input{
+        font-size: 16px; 
+    }
+    .photo_item h2{
         font-size: 16px;
     }
 }
@@ -66,13 +96,16 @@ footer p{
         width: 100%;
         box-sizing: border-box;
     }
-    input{
-        width: 300px; 
+    .filter_input{
+        width: 200px; 
         font-size: 14px; 
         padding: 10px 20px;
         border: 1px solid #ddd;
     } 
-    h2{
+    .btn_clear_input{
+        font-size: 14px; 
+    }
+    .photo_item h2{
         font-size: 14px;
     }
 }

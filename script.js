@@ -1,17 +1,26 @@
 let photos = [];
-const input = document.querySelector('input'),
-      main = document.querySelector('.photo_container');
+const input = document.querySelector('.filter_input');
+const main = document.querySelector('.photo_container');
+const btnClearInput = document.querySelector('.btn_clear_input');
 
 // Загрузка данных из API
 const getData = url => fetch(url)
 .then(res => res.json())
 .then(data => {
-    photos = data.hits;
+    photos = [...data.hits];
     showPhoto(photos);
 })
 .catch(error => console.error('Ошибка:', error))
 
-getData('https://pixabay.com/api/?key=37954840-02a2d9419214ddd959c05fe70&image_type=photo');
+getData('https://pixabay.com/api/?key=37954840-02a2d9419214ddd959c05fe70&orientation=vertical&image_type=photo&per_page=21');
+
+// Функция очистки фильтра тегов
+function clearInput() {
+    if(input.value !== ''){
+        input.value = '';
+        showPhoto(photos);
+    }
+}
 
 // Функция создающая элемент для вывода фото
 function createElementShowPhoto(elem){
@@ -39,3 +48,6 @@ function filterPhotos() {
 
 // Инпут для ввода тегов
 input.addEventListener('input', filterPhotos);
+
+// Вызов функции очистки фильтра
+btnClearInput.addEventListener('click', clearInput);
