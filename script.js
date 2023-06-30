@@ -57,14 +57,18 @@ input.addEventListener('input', filterPhotos);
 // Вызов функции очистки фильтра
 btnClearInput.addEventListener('click', clearInput);
 
+// Вызов предыдущей страницы
 btnPrevPage.addEventListener('click', () => {
     currentPage--;
     pageNumber.textContent = currentPage;
     getData(URL_IMAGE_SERVER, currentPage);
+    if(currentPage < 2) btnPrevPage.setAttribute('disabled', true);
 });
 
+// Вызов следующей страницы
 btnNextPage.addEventListener('click', () => {
     currentPage++;
     pageNumber.textContent = currentPage;
     getData(URL_IMAGE_SERVER, currentPage);
+    if(currentPage > 1) btnPrevPage.removeAttribute('disabled');
 });
