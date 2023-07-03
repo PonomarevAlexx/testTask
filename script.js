@@ -10,12 +10,15 @@ const pageNumber = document.querySelector('.number_page');
 let photos = [];
 let currentPage = 1;
 let timeoutId;
+let numberOfPage;
 
 // Загрузка данных из API
 const getData = (url, page = 1, filterValue) => fetch(`${url}&page=${page}&q=${filterValue || ''}`)
 .then(res => res.json())
-.then(({totalHits, hits}) => {
+.then(({totalHits, hits, total}) => {
     photos = [...hits];
+
+    numberOfPage = total / 21;
 
     if (totalHits === 0) {
         main.innerHTML = '<h2>Ничего не найдено</h2>';
@@ -24,6 +27,8 @@ const getData = (url, page = 1, filterValue) => fetch(`${url}&page=${page}&q=${f
     } else if (btnNextPage.disabled){
         btnNextPage.disabled = false;
     }
+    
+    if(currentPage >= numberOfPage) btnNextPage.disabled = true;
 
     showPhoto(photos);
 })
