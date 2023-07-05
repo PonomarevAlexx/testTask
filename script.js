@@ -6,6 +6,9 @@ const btnClearInput = document.querySelector('.btn_clear_input');
 const btnPrevPage = document.querySelector('.btn_prev');
 const btnNextPage = document.querySelector('.btn_next');
 const pageNumber = document.querySelector('.number_page');
+const modal = document.querySelector('.modal');
+const modalImg = document.querySelector('.modal-img');
+const btnCloseModal = document.querySelector('.modal-close');
 
 let photos = [];
 let currentPage = 1;
@@ -52,6 +55,11 @@ function createElementShowPhoto({user, largeImageURL}){
         <h2>${user}</h2>
         <img src="${largeImageURL}" alt="${user}"></img>
     `
+    // Открытие модального окна
+    photoItem.addEventListener('click', () => {
+        showModal(largeImageURL);
+    })
+
     main.appendChild(photoItem);
 }
 
@@ -69,6 +77,19 @@ function filterPhotos() {
       currentPage = 1;
       paginationControl(1);
     }, 500);
+}
+
+// Функция откытия модального окна
+function showModal(url){
+    modal.classList.remove('hidden');
+    modal.classList.add('active');
+    modalImg.src = url;
+}
+
+// Функция закрытия модальнго окна 
+function closeModal() {
+    modal.classList.remove('active');
+    modal.classList.add('hidden');
 }
 
 // Инпут для ввода тегов
@@ -92,4 +113,15 @@ btnPrevPage.addEventListener('click', () => {
 // Вызов следующей страницы
 btnNextPage.addEventListener('click', () => {
     paginationControl(++currentPage);
+});
+
+// Закрытие модального окна
+btnCloseModal.addEventListener('click', closeModal);
+
+modal.addEventListener('click', (e) => {
+    if(e.target === modal) closeModal();
+});
+
+window.addEventListener('keydown', (e) => {
+    if(!modal.classList.contains('hidden') && e.key === 'Escape') closeModal();
 });
