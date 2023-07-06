@@ -55,10 +55,10 @@ function createElementShowPhoto({user, largeImageURL}){
         <h2>${user}</h2>
         <img src="${largeImageURL}" alt="${user}"></img>
     `
-    // Открытие модального окна
-    photoItem.addEventListener('click', () => {
-        showModal(largeImageURL);
-    })
+    // Вариант 1 Открытие модального окна
+    // photoItem.addEventListener('click', () => {
+    //     showModal(largeImageURL);
+    // })
 
     main.appendChild(photoItem);
 }
@@ -114,6 +114,12 @@ btnPrevPage.addEventListener('click', () => {
 btnNextPage.addEventListener('click', () => {
     paginationControl(++currentPage);
 });
+
+// Вариант 2 Открытие модального окна
+main.addEventListener('click', (e) => {
+    let url = e.target.src;
+    if(e.target.tagName === 'IMG') showModal(url);
+})
 
 // Закрытие модального окна
 btnCloseModal.addEventListener('click', closeModal);
